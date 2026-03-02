@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, ContentChild, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
+import { NgIf, NgFor, NgTemplateOutlet, CommonModule } from '@angular/common';
 import { SkeletonComponent } from '../skeleton/skeleton';
 
 export interface TableColumn {
@@ -14,7 +14,16 @@ export interface TableColumn {
 @Component({
   selector: 'app-data-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatIconModule, SkeletonComponent],
+  imports: [
+    CommonModule,
+    NgIf,
+    NgFor,
+    NgTemplateOutlet,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    SkeletonComponent
+  ],
   template: `
     <div class="table-wrapper premium-card">
       <div class="table-container">
@@ -90,21 +99,21 @@ export interface TableColumn {
     .no-data-cell { 
       padding: 64px 16px; 
       text-align: center;
-      
-      .empty-state {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        color: var(--text-muted);
+    }
 
-        mat-icon {
-          font-size: 48px;
-          width: 48px;
-          height: 48px;
-          opacity: 0.5;
-        }
-      }
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+    }
+
+    .empty-state mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      opacity: 0.5;
     }
 
     ::ng-deep .mat-mdc-paginator {

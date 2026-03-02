@@ -7,7 +7,8 @@
   <span class="spacer"></span>
 
   <div class="actions-group">
-    <button mat-icon-button (click)="themeService.toggleTheme()" [aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+    <button mat-icon-button (click)="themeService.toggleTheme()"
+      [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
       <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
 
