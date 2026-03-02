@@ -1,0 +1,53 @@
+<div class="page-container">
+  <div class="header-row">
+    <div class="title-group">
+      <h1>Staff Management</h1>
+      <p class="subtitle">Manage team members and their access roles</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="openStaffDialog()" *ngIf="isAdmin">
+      <mat-icon>person_add</mat-icon>
+      Add Staff
+    </button>
+  </div>
+
+  <mat-card class="table-card">
+    <!-- Filter Panel -->
+    <app-filter-panel [configs]="filterConfig" (filterChanged)="onFilterChanged($event)"></app-filter-panel>
+
+    <!-- Data Table -->
+    <app-data-table 
+      [data]="staff()" 
+      [columns]="columnConfig" 
+      [total]="staff().length" 
+      [pageSize]="100"
+      [isLoading]="isLoading()"
+      [templates]="{ active: statusTpl, workload: workloadTpl, actions: actionsTpl }"
+      (pageChanged)='loadStaff()'>
+    </app-data-table>
+  </mat-card>
+</div>
+
+<!-- Templates for Data Table Columns -->
+<ng-template #statusTpl let-element>
+  <span class="status-badge" [ngClass]="element.active ? 'filed' : 'overdue'">
+    {{ element.active ? 'Active' : 'Inactive' }}
+  </span>
+</ng-template>
+
+<ng-template #workloadTpl let-element>
+  <span class="workload-count" [class.heavy]="element.workload > 5">
+    {{ element.workload }} tasks
+  </span>
+</ng-template>
+
+<ng-template #actionsTpl let-element>
+  <ng-container *ngIf="isAdmin">
+    <button mat-icon-button color="primary" (click)="openStaffDialog(element)" matTooltip="Edit Staff">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteStaff(element)" matTooltip="Delete Staff">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </ng-container>
+  <span *ngIf="!isAdmin" class="no-actions">View Only</span>
+</ng-template>

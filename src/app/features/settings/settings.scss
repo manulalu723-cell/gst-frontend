@@ -1,0 +1,136 @@
+.page-container {
+    padding: 24px;
+}
+
+.header-section {
+    margin-bottom: 24px;
+
+    h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 500;
+    }
+
+    .subtitle {
+        margin: 4px 0 0;
+        color: #666;
+    }
+}
+
+.tab-icon {
+    margin-right: 8px;
+}
+
+.tab-content {
+    padding: 24px 0;
+    max-width: 600px;
+}
+
+.settings-card {
+    padding: 8px;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.preferences-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 16px !important;
+}
+
+.preference-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preference-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .pref-label {
+        font-weight: 500;
+        font-size: 1rem;
+    }
+
+    .pref-desc {
+        font-size: 0.875rem;
+        color: #666;
+    }
+}
+
+.status-desc {
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.status-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: 4px 4px 4px 12px;
+
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.filed {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        &.pending {
+            background-color: var(--status-pending-bg);
+            color: var(--status-pending);
+        }
+
+        &.in-progress {
+            background-color: var(--status-progress-bg);
+            color: var(--status-progress);
+        }
+
+        &.overdue {
+            background-color: var(--status-overdue-bg);
+            color: var(--status-overdue);
+        }
+    }
+}
+
+.add-status-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    mat-form-field {
+        margin-bottom: -1.25em;
+    }
+}

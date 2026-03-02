@@ -1,0 +1,19 @@
+.staff-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+    min-width: 350px;
+}
+
+.toggle-row {
+    padding: 8px 0 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+mat-dialog-actions {
+    padding: 16px 24px;
+}

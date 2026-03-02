@@ -1,0 +1,118 @@
+@use '@angular/material' as mat;
+
+:root {
+  // Light Theme Tokens (Modern Indigo/Slate)
+  --primary: #4f46e5;
+  --primary-light: #eef2ff;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+
+  // Status Colors
+  --status-filed: #10b981;
+  --status-filed-bg: #ecfdf5;
+  --status-pending: #f59e0b;
+  --status-pending-bg: #fffbeb;
+  --status-overdue: #ef4444;
+  --status-overdue-bg: #fef2f2;
+  --status-progress: #3b82f6;
+  --status-progress-bg: #eff6ff;
+
+  // Layout & Shadows
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  --sidebar-width: 260px;
+}
+
+.dark-theme {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --primary-light: rgba(79, 70, 229, 0.1);
+
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+
+  --status-filed-bg: rgba(16, 185, 129, 0.1);
+  --status-pending-bg: rgba(245, 158, 11, 0.1);
+  --status-overdue-bg: rgba(239, 68, 68, 0.1);
+  --status-progress-bg: rgba(59, 130, 246, 0.1);
+
+  .mat-mdc-table,
+  .mat-mdc-paginator,
+  .mdc-data-table__content {
+    background-color: var(--bg-card) !important;
+  }
+}
+
+html {
+  height: 100%;
+  @include mat.theme((color: (primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Global Reusable Classes
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  display: inline-flex;
+  align-items: center;
+
+  &.filed {
+    background: var(--status-filed-bg);
+    color: var(--status-filed);
+  }
+
+  &.pending {
+    background: var(--status-pending-bg);
+    color: var(--status-pending);
+  }
+
+  &.overdue {
+    background: var(--status-overdue-bg);
+    color: var(--status-overdue);
+  }
+
+  &.in-progress {
+    background: var(--status-progress-bg);
+    color: var(--status-progress);
+  }
+}
+
+.premium-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+
+  &:hover {
+    box-shadow: var(--shadow-md) !important;
+  }
+}

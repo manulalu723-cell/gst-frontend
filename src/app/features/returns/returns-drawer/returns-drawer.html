@@ -1,0 +1,164 @@
+<div class="drawer-header">
+    <div style="display: flex; flex-direction: column;">
+        <h3>{{returnData?.client_name}}</h3>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">{{returnData?.month}}
+            {{returnData?.financial_year}}</span>
+    </div>
+    <button mat-icon-button (click)="onClose()" type="button"><mat-icon>close</mat-icon></button>
+</div>
+
+<div class="drawer-content" *ngIf="returnData">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="drawer-form">
+        <mat-accordion multi>
+
+            <!-- GSTR-1 Section -->
+            <mat-expansion-panel expanded>
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-weight: 500;">GSTR-1 Details</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="gstr1_status">
+                            <mat-option *ngFor="let opt of statusOptions" [value]="opt.value">{{opt.label}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Filed Date</mat-label>
+                        <input matInput [matDatepicker]="p1" formControlName="gstr1_filed_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="p1"></mat-datepicker-toggle>
+                        <mat-datepicker #p1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Bill/Tally Received?</mat-label>
+                        <mat-select formControlName="gstr1_tally_received">
+                            <mat-option value="">Select...</mat-option>
+                            <mat-option value="Yes">Yes</mat-option>
+                            <mat-option value="No">No</mat-option>
+                            <mat-option value="NA">NA</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                    <mat-checkbox formControlName="gstr1_entered_in_tally" color="primary">Entered in
+                        Tally</mat-checkbox>
+                    <mat-checkbox formControlName="gstr1_nil_return" color="primary">Nil Return</mat-checkbox>
+                </div>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Comments (GSTR-1)</mat-label>
+                    <textarea matInput formControlName="gstr1_comments" rows="2"
+                        placeholder="GSTR-1 notes..."></textarea>
+                </mat-form-field>
+            </mat-expansion-panel>
+
+            <!-- GSTR-3B Section -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-weight: 500;">GSTR-3B Details</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="gstr3b_status">
+                            <mat-option *ngFor="let opt of statusOptions" [value]="opt.value">{{opt.label}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Filed Date</mat-label>
+                        <input matInput [matDatepicker]="p3" formControlName="gstr3b_filed_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="p3"></mat-datepicker-toggle>
+                        <mat-datepicker #p3></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Bill/Tally Received?</mat-label>
+                        <mat-select formControlName="gstr3b_tally_received">
+                            <mat-option value="">Select...</mat-option>
+                            <mat-option value="Yes">Yes</mat-option>
+                            <mat-option value="No">No</mat-option>
+                            <mat-option value="NA">NA</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Reconciliation</mat-label>
+                        <mat-select formControlName="gstr3b_reconciliation">
+                            <mat-option value="">Select...</mat-option>
+                            <mat-option value="Completed">Completed</mat-option>
+                            <mat-option value="Not Applicable">Not Applicable</mat-option>
+                            <mat-option value="Blank">Blank</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Tax liability for the month</mat-label>
+                    <input matInput formControlName="gstr3b_tax_liability" placeholder="e.g. ₹ 50,000">
+                </mat-form-field>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+                    <mat-checkbox formControlName="gstr3b_entered_in_tally" color="primary">Entered in
+                        Tally</mat-checkbox>
+                    <mat-checkbox formControlName="gstr3b_notices_orders" color="primary">Notices &
+                        Orders</mat-checkbox>
+                    <mat-checkbox formControlName="gstr3b_bills_pending" color="primary">Bills Pending</mat-checkbox>
+                    <mat-checkbox formControlName="gstr3b_nil_return" color="primary">Nil Return</mat-checkbox>
+                </div>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Comments (GSTR-3B)</mat-label>
+                    <textarea matInput formControlName="gstr3b_comments" rows="2"
+                        placeholder="GSTR-3B notes..."></textarea>
+                </mat-form-field>
+            </mat-expansion-panel>
+
+            <!-- Billing & Other Section -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title style="font-weight: 500;">Billing & Other</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div style="margin-bottom: 16px;">
+                    <mat-checkbox formControlName="gstr1a_applicable" color="primary">GSTR1A Applicable?</mat-checkbox>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="outline" class="half-width">
+                        <mat-label>Billing Status</mat-label>
+                        <input matInput formControlName="billing_status" placeholder="e.g. Invoice Raised">
+                    </mat-form-field>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <mat-checkbox formControlName="bill_sent" color="primary">Bill Sent?</mat-checkbox>
+                </div>
+
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>General Remarks (Legacy)</mat-label>
+                    <textarea matInput formControlName="remarks" rows="2"
+                        placeholder="Any old remarks/notes..."></textarea>
+                </mat-form-field>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="drawer-actions" style="margin-top: 24px;">
+            <button mat-button type="button" (click)="onClose()" [disabled]="isSubmitting">Cancel</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting || editForm.invalid">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+<div class="drawer-loading" *ngIf="isSubmitting">
+    <mat-spinner diameter="30"></mat-spinner>
+</div>

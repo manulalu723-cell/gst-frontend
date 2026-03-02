@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "clientName": "Acme Corp",
+        "gstin": "27AAAAA0000A1Z5",
+        "filingType": "Monthly",
+        "state": "Maharashtra",
+        "isActive": true
+    },
+    {
+        "id": "2",
+        "clientName": "Global Tech",
+        "gstin": "27BBBBB0000B1Z5",
+        "filingType": "QRMP",
+        "state": "Karnataka",
+        "isActive": true
+    },
+    {
+        "id": "3",
+        "clientName": "Local Shop",
+        "gstin": "27CCCCC0000C1Z5",
+        "filingType": "Monthly",
+        "state": "Delhi",
+        "isActive": false
+    }
+]

@@ -1,0 +1,128 @@
+.dashboard-container {
+    padding: 24px;
+    min-height: 100%;
+}
+
+.header-section {
+    margin-bottom: 32px;
+
+    h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+        margin: 4px 0 0;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+    }
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    &.clients .stat-icon { background: var(--primary-light); color: var(--primary); }
+    &.returns .stat-icon { background: var(--status-progress-bg); color: var(--status-progress); }
+    &.filed .stat-icon { background: var(--status-filed-bg); color: var(--status-filed); }
+    &.pending .stat-icon { background: var(--status-pending-bg); color: var(--status-pending); }
+    &.overdue .stat-icon { background: var(--status-overdue-bg); color: var(--status-overdue); }
+
+    mat-card-content {
+        padding: 20px !important;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 24px;
+}
+
+.chart-card {
+    mat-card-header {
+        padding: 24px 24px 0;
+        
+        mat-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        mat-card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    }
+    
+    mat-card-content {
+        padding: 24px !important;
+    }
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    transition: opacity 0.3s ease;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.chart-skeleton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+@media (max-width: 768px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}

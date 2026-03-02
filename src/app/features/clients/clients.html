@@ -1,0 +1,43 @@
+<div class="page-container">
+    <div class="header-row">
+        <div class="title-group">
+            <h1>Client Management</h1>
+            <p class="subtitle">Search, filter, and manage your GST clients</p>
+        </div>
+        <button mat-raised-button color="primary" (click)="addClient()">
+            <mat-icon>add</mat-icon> Add Client
+        </button>
+    </div>
+
+    <mat-card class="table-card">
+        <!-- Filter Panel -->
+        <app-filter-panel [configs]="filterConfig" (filterChanged)="onFilterChanged($event)"></app-filter-panel>
+
+        <!-- Data Table -->
+        <app-data-table 
+            [data]="clients()" 
+            [columns]="columnConfig" 
+            [total]="totalClients()" 
+            [pageSize]="pageSize"
+            [isLoading]="isLoading()"
+            [templates]="{ isActive: statusTpl, actions: actionsTpl }"
+            (pageChanged)="onPageChanged($event)">
+        </app-data-table>
+    </mat-card>
+</div>
+
+<!-- Templates for Data Table Columns -->
+<ng-template #statusTpl let-element>
+    <mat-slide-toggle [checked]="element.isActive" color="primary" (change)="toggleStatus(element, $event.checked)">
+        {{ element.isActive ? 'Active' : 'Inactive' }}
+    </mat-slide-toggle>
+</ng-template>
+
+<ng-template #actionsTpl let-element>
+    <button mat-icon-button color="primary" (click)="editClient(element)" matTooltip="Edit Client">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteClient(element)" matTooltip="Delete Client">
+        <mat-icon>delete</mat-icon>
+    </button>
+</ng-template>

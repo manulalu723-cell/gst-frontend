@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Staff member' : 'Add New Staff' }}</h2>
+<mat-dialog-content>
+    <form [formGroup]="staffForm" class="staff-form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter name">
+            <mat-error *ngIf="staffForm.get('name')?.hasError('required')">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" formControlName="email" placeholder="email@example.com">
+            <mat-error *ngIf="staffForm.get('email')?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="staffForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+                <mat-option value="Staff">Staff</mat-option>
+                <mat-option value="Admin">Admin</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="toggle-row">
+            <mat-slide-toggle formControlName="active">Active Account</mat-slide-toggle>
+        </div>
+        <mat-form-field appearance="outline" class="full-width" *ngIf="!isEditMode">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Min 6 characters">
+            <mat-error *ngIf="staffForm.get('password')?.hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="staffForm.get('password')?.hasError('minlength')">Minimum 6 characters
+                required</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="staffForm.invalid">
+        {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
+</mat-dialog-actions>

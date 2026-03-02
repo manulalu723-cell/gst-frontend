@@ -1,0 +1,41 @@
+<mat-toolbar class="header-toolbar">
+  <button mat-icon-button class="menu-button" (click)="toggleSidenav.emit()" aria-label="Toggle menu">
+    <mat-icon>menu_open</mat-icon>
+  </button>
+  <span class="app-title">GST Dashboard</span>
+
+  <span class="spacer"></span>
+
+  <div class="actions-group">
+    <button mat-icon-button (click)="themeService.toggleTheme()" [aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+      <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+
+    <button mat-icon-button aria-label="Notifications" class="noti-btn">
+      <mat-icon>notifications_none</mat-icon>
+      <span class="badge-dot"></span>
+    </button>
+
+    <div class="user-chip" [matMenuTriggerFor]="userMenu">
+      <ng-container *ngIf="authService.currentUser() as user">
+        <div class="user-avatar">{{ user.email[0].toUpperCase() }}</div>
+        <div class="user-details">
+          <span class="username">{{ user.name || 'Admin User' }}</span>
+          <span class="role">{{ user.role }}</span>
+        </div>
+      </ng-container>
+      <mat-icon>expand_more</mat-icon>
+    </div>
+  </div>
+
+  <mat-menu #userMenu="matMenu" class="user-dropdown">
+    <button mat-menu-item>
+      <mat-icon>person_outline</mat-icon>
+      <span>My Profile</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

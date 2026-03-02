@@ -1,0 +1,26 @@
+.page-container {
+    padding: 24px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 500;
+    }
+
+    .subtitle {
+        margin: 4px 0 0;
+        color: #666;
+    }
+}
+
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}

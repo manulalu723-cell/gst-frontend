@@ -1,0 +1,80 @@
+<div class="page-container">
+    <div class="header-section">
+        <h1>Reports & Analytics</h1>
+        <p class="subtitle">Generate and export tax filing performance summaries</p>
+    </div>
+
+    <div class="reports-layout">
+        <!-- Config Card -->
+        <mat-card class="config-card premium-card">
+            <mat-card-header>
+                <mat-card-title>Configuration</mat-card-title>
+                <mat-card-subtitle>Set parameters for your report</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="reportForm" class="report-form">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Report Type</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option value="filing-summary">Filing Summary</mat-option>
+                            <mat-option value="tax-liability">Client Tax Liability</mat-option>
+                            <mat-option value="staff-performance">Staff Performance</mat-option>
+                        </mat-select>
+                        <mat-icon matPrefix>analytics</mat-icon>
+                    </mat-form-field>
+
+                    <div class="date-range">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Start Date</mat-label>
+                            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+                            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startPicker></mat-datepicker>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>End Date</mat-label>
+                            <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+                            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #endPicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <button mat-flat-button color="primary" class="generate-btn" (click)="generateReport()"
+                        [disabled]="isLoading()">
+                        <mat-icon *ngIf="!isLoading()">play_circle_outline</mat-icon>
+                        <mat-spinner diameter="20" *ngIf="isLoading()"></mat-spinner>
+                        Generate Report
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Preview Card -->
+        <mat-card class="preview-card premium-card" *ngIf="previewData().length > 0">
+            <mat-card-header>
+                <div class="preview-header">
+                    <mat-card-title>{{ reportTitle() }}</mat-card-title>
+                    <button mat-stroked-button color="primary" (click)="exportReport()">
+                        <mat-icon>download</mat-icon>
+                        Export CSV
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                <app-data-table 
+                    [data]="previewData()" 
+                    [columns]="columnConfig()" 
+                    [total]="previewData().length" 
+                    [pageSize]="20"
+                    [isLoading]="isLoading()">
+                </app-data-table>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Content Placeholder -->
+        <div class="no-data" *ngIf="previewData().length === 0 && !isLoading()">
+            <mat-icon>query_stats</mat-icon>
+            <p>Select report criteria and click generate to see results.</p>
+        </div>
+    </div>
+</div>
